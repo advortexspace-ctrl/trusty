@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credibility - Premium Social Media Accounts & Advertising</title>
+    <title>Credibility - Premium Social Media Accounts & Advertising Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS Reset & Base Styles */
@@ -23,16 +23,19 @@
             --accent-blue: #0080ff;
             --accent-purple: #7b61ff;
             --accent-red: #ff3366;
+            --accent-orange: #ff7b00;
             --text-light: #f0f0f0;
             --text-gray: #b0b0b0;
-            --border-gray: #333333;
+            --border-gray: #2a2a2a;
             --card-bg: #1a1a1a;
             --gradient-primary: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
             --gradient-secondary: linear-gradient(135deg, var(--accent-purple), var(--accent-red));
             --gradient-dark: linear-gradient(135deg, #111, #222);
+            --gradient-orange: linear-gradient(135deg, var(--accent-orange), #ff3366);
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --shadow-light: 0 5px 15px rgba(0, 255, 157, 0.1);
             --transition: all 0.3s ease;
-            --border-radius: 12px;
+            --border-radius: 16px;
             --header-height: 80px;
         }
 
@@ -43,9 +46,13 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 128, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(123, 97, 255, 0.03) 0%, transparent 30%);
         }
 
-        /* Animated Background (Desktop Only) */
+        /* Advanced Background Animation */
         .background-animation {
             position: fixed;
             top: 0;
@@ -53,135 +60,85 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.05;
-            display: none;
+            overflow: hidden;
+            opacity: 0.7;
         }
 
-        @media (min-width: 768px) {
-            .background-animation {
-                display: block;
-            }
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
 
-        .gradient-circle {
+        .floating-shape {
             position: absolute;
             border-radius: 50%;
-            filter: blur(60px);
-            animation: float 15s infinite ease-in-out;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: floatShape 20s infinite ease-in-out;
         }
 
-        .circle-1 {
-            width: 300px;
-            height: 300px;
+        .shape-1 {
+            width: 400px;
+            height: 400px;
             background: var(--accent-blue);
-            top: 10%;
+            top: 5%;
             left: 5%;
             animation-delay: 0s;
         }
 
-        .circle-2 {
-            width: 250px;
-            height: 250px;
+        .shape-2 {
+            width: 300px;
+            height: 300px;
             background: var(--accent-green);
             top: 60%;
             right: 10%;
             animation-delay: 5s;
         }
 
-        .circle-3 {
-            width: 200px;
-            height: 200px;
+        .shape-3 {
+            width: 250px;
+            height: 250px;
             background: var(--accent-purple);
             bottom: 10%;
             left: 15%;
             animation-delay: 10s;
         }
 
-        @keyframes float {
+        .shape-4 {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-red);
+            top: 20%;
+            right: 20%;
+            animation-delay: 15s;
+        }
+
+        @keyframes floatShape {
             0%, 100% {
-                transform: translateY(0) scale(1);
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(20px, -20px) scale(1.05);
             }
             50% {
-                transform: translateY(-20px) scale(1.05);
+                transform: translate(-15px, 15px) scale(0.95);
+            }
+            75% {
+                transform: translate(10px, 10px) scale(1.02);
             }
         }
 
-        /* Hero Background */
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            opacity: 0.7;
-        }
-
-        .account-grid {
+        /* Network Grid */
+        .network-grid {
             position: absolute;
             width: 100%;
             height: 100%;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(4, 1fr);
-            gap: 15px;
-            padding: 20px;
-            opacity: 0.5;
-        }
-
-        .account-item {
-            background: var(--gradient-dark);
-            border-radius: 8px;
-            border: 1px solid rgba(0, 255, 157, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            transition: var(--transition);
-            animation: pulse 4s infinite ease-in-out;
-        }
-
-        .account-item:nth-child(2n) {
-            animation-delay: 1s;
-        }
-
-        .account-item:nth-child(3n) {
-            animation-delay: 2s;
-        }
-
-        .account-icon {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            color: var(--accent-green);
-        }
-
-        .account-name {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-light);
-            text-align: center;
-        }
-
-        .account-status {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--accent-green);
-            margin-top: 5px;
-            box-shadow: 0 0 8px var(--accent-green);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: translateY(0);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateY(-5px);
-                opacity: 0.8;
-            }
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
         }
 
         /* Animated Logo */
@@ -199,65 +156,109 @@
             display: flex;
             align-items: center;
             position: relative;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-main {
+            position: relative;
         }
 
         .logo-text {
-            position: relative;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: logoGlow 3s infinite alternate;
-        }
-
-        @keyframes logoGlow {
-            0% {
-                filter: drop-shadow(0 0 5px rgba(0, 255, 157, 0.5));
-            }
-            100% {
-                filter: drop-shadow(0 0 15px rgba(0, 255, 157, 0.8));
-            }
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-            margin-right: 10px;
             position: relative;
-            animation: logoSpin 10s infinite linear;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            z-index: 2;
+            font-weight: 800;
         }
 
-        @keyframes logoSpin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .logo-shield {
+        .logo-glow {
             position: absolute;
-            top: -5px;
-            left: -5px;
-            width: 40px;
-            height: 40px;
-            border: 2px solid transparent;
-            border-radius: 50%;
-            border-top-color: var(--accent-green);
-            border-right-color: var(--accent-blue);
-            animation: logoShield 3s infinite linear;
+            top: 0;
+            left: 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            z-index: 1;
+            filter: blur(8px);
+            opacity: 0.7;
+            animation: logoPulse 2s infinite alternate;
         }
 
-        @keyframes logoShield {
+        @keyframes logoPulse {
+            0% {
+                opacity: 0.5;
+                filter: blur(8px);
+            }
+            100% {
+                opacity: 0.8;
+                filter: blur(12px);
+            }
+        }
+
+        .logo-badge {
+            position: relative;
+            margin-left: 15px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-badge-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            animation: badgeRotate 10s infinite linear;
+        }
+
+        @keyframes badgeRotate {
             0% {
                 transform: rotate(0deg);
             }
             100% {
                 transform: rotate(360deg);
+            }
+        }
+
+        .logo-badge-icon {
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+            font-weight: 900;
+            z-index: 3;
+            animation: badgeIconRotate 10s infinite linear reverse;
+        }
+
+        .logo-badge-glow {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border-radius: 12px;
+            background: var(--gradient-primary);
+            filter: blur(10px);
+            opacity: 0.5;
+            z-index: 1;
+            animation: badgePulse 3s infinite alternate;
+        }
+
+        @keyframes badgePulse {
+            0% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.7;
+                transform: scale(1.1);
             }
         }
 
@@ -274,6 +275,7 @@
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 1rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         h1 {
@@ -383,6 +385,22 @@
             z-index: 1;
         }
 
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
         .btn-primary {
             background: var(--gradient-primary);
             color: var(--primary-dark);
@@ -390,7 +408,7 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-light);
         }
 
         .btn-secondary {
@@ -449,6 +467,7 @@
             font-weight: 600;
             transition: var(--transition);
             position: relative;
+            font-size: 0.95rem;
         }
 
         .nav-menu a:hover {
@@ -579,7 +598,7 @@
         /* Services Section */
         .services {
             padding: 100px 0;
-            background-color: var(--secondary-dark);
+            background-color: rgba(17, 17, 17, 0.8);
         }
 
         .services-grid {
@@ -599,12 +618,35 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-green);
             box-shadow: var(--shadow);
+        }
+
+        .service-card:hover:before {
+            opacity: 0.05;
+        }
+
+        .service-card > * {
+            position: relative;
+            z-index: 1;
         }
 
         .service-badge {
@@ -617,6 +659,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 700;
+            z-index: 2;
         }
 
         .service-icon {
@@ -680,11 +723,36 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border-gray);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0;
         }
 
         .benefit-item:hover {
             border-color: var(--accent-blue);
             transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-item:hover:before {
+            opacity: 0.05;
+        }
+
+        .benefit-item > * {
+            position: relative;
+            z-index: 1;
         }
 
         .benefit-icon {
@@ -703,10 +771,186 @@
             }
         }
 
+        /* Trust & Security Section */
+        .trust-section {
+            padding: 100px 0;
+            background-color: rgba(17, 17, 17, 0.8);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .trust-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            border: 1px solid var(--border-gray);
+            transition: var(--transition);
+        }
+
+        .trust-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
+        }
+
+        .trust-icon {
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            margin-bottom: 20px;
+        }
+
+        .trust-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .trust-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-gray);
+            color: var(--text-gray);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .trust-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            border: 1px solid var(--border-gray);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-rating {
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .testimonial-info p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 0;
+            background-color: rgba(17, 17, 17, 0.8);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border: 1px solid var(--border-gray);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-question h3 {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .faq-icon {
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 20px;
+            max-height: 500px;
+        }
+
         /* Contact Section */
         .contact {
             padding: 100px 0;
-            background-color: var(--secondary-dark);
         }
 
         .contact-content {
@@ -773,6 +1017,7 @@
             color: var(--text-light);
             margin-bottom: 15px;
             display: block;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .footer-logo span {
@@ -996,11 +1241,15 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background (Desktop Only) -->
+    <!-- Advanced Background Animation -->
     <div class="background-animation">
-        <div class="gradient-circle circle-1"></div>
-        <div class="gradient-circle circle-2"></div>
-        <div class="gradient-circle circle-3"></div>
+        <div class="floating-shapes">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+            <div class="floating-shape shape-4"></div>
+        </div>
+        <div class="network-grid"></div>
     </div>
 
     <!-- Header -->
@@ -1008,9 +1257,16 @@
         <div class="container header-container">
             <div class="logo-container">
                 <a href="#" class="logo">
-                    <div class="logo-shield"></div>
-                    <i class="fas fa-shield-alt logo-icon"></i>
-                    <span class="logo-text">Credibility</span>
+                    <div class="logo-main">
+                        <span class="logo-glow">Credibility</span>
+                        <span class="logo-text">Credibility</span>
+                    </div>
+                    <div class="logo-badge">
+                        <div class="logo-badge-glow"></div>
+                        <div class="logo-badge-inner">
+                            <span class="logo-badge-icon">✓</span>
+                        </div>
+                    </div>
                 </a>
             </div>
             
@@ -1022,6 +1278,9 @@
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#why-us" class="nav-link">Why Us</a></li>
+                <li><a href="#trust" class="nav-link">Trust Policy</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </div>
@@ -1029,52 +1288,17 @@
 
     <!-- Hero Section -->
     <section class="hero section" id="home">
-        <div class="hero-background">
-            <div class="account-grid">
-                <div class="account-item">
-                    <i class="fab fa-facebook-f account-icon"></i>
-                    <div class="account-name">FB Business</div>
-                    <div class="account-status"></div>
-                </div>
-                <div class="account-item">
-                    <i class="fab fa-instagram account-icon"></i>
-                    <div class="account-name">IG Verified</div>
-                    <div class="account-status"></div>
-                </div>
-                <div class="account-item">
-                    <i class="fas fa-ad account-icon"></i>
-                    <div class="account-name">Ad Account</div>
-                    <div class="account-status"></div>
-                </div>
-                <div class="account-item">
-                    <i class="fab fa-facebook-f account-icon"></i>
-                    <div class="account-name">FB Aged</div>
-                    <div class="account-status"></div>
-                </div>
-                <div class="account-item">
-                    <i class="fab fa-instagram account-icon"></i>
-                    <div class="account-name">IG Business</div>
-                    <div class="account-status"></div>
-                </div>
-                <div class="account-item">
-                    <i class="fas fa-user-shield account-icon"></i>
-                    <div class="account-name">Secure</div>
-                    <div class="account-status"></div>
-                </div>
-            </div>
-        </div>
-        
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Premium Social Media Accounts & Advertising</h1>
+                <h1>Premium Social Media Accounts & Advertising Solutions</h1>
                 <p class="hero-description">
-                    Credibility provides verified, secure Facebook & Instagram accounts, advertising cabinets, and full management services. Scale your advertising with confidence using our premium accounts.
+                    Credibility provides verified, secure Facebook & Instagram accounts, advertising cabinets, and full management services. Scale your advertising with confidence using our premium accounts trusted by 2,500+ businesses worldwide.
                 </p>
                 
                 <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number">2,500+</span>
-                        <span class="stat-label">Accounts Delivered</span>
+                        <span class="stat-label">Clients Worldwide</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">99.7%</span>
@@ -1082,16 +1306,20 @@
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">24/7</span>
-                        <span class="stat-label">Support</span>
+                        <span class="stat-label">Premium Support</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Account Stability</span>
                     </div>
                 </div>
                 
                 <div class="hero-buttons">
                     <button class="btn btn-primary" id="choose-service-hero">
-                        <i class="fas fa-check-circle btn-icon"></i> Get Started
+                        <i class="fas fa-rocket btn-icon"></i> Get Started Now
                     </button>
                     <a href="#services" class="btn btn-secondary">
-                        <i class="fas fa-list-alt btn-icon"></i> View Services
+                        <i class="fas fa-list-alt btn-icon"></i> Explore Services
                     </a>
                 </div>
             </div>
@@ -1287,6 +1515,204 @@
         </div>
     </section>
 
+    <!-- Trust & Security Section -->
+    <section class="trust-section section" id="trust">
+        <div class="container">
+            <h2>Our Trust & Security Policy</h2>
+            <p class="section-subtitle">
+                Your security and trust are our top priorities. We implement the highest standards to protect your accounts and data.
+            </p>
+            
+            <div class="trust-grid">
+                <div class="trust-card fade-in">
+                    <i class="fas fa-shield-alt trust-icon"></i>
+                    <h3>Account Security Guarantee</h3>
+                    <p>We implement multiple layers of security to ensure your accounts remain safe and operational.</p>
+                    
+                    <ul class="trust-list">
+                        <li>Two-Factor Authentication (2FA) on all accounts</li>
+                        <li>Regular security audits and updates</li>
+                        <li>Dedicated IP addresses for premium clients</li>
+                        <li>Anti-detection browser configurations</li>
+                        <li>Secure payment gateways with encryption</li>
+                    </ul>
+                </div>
+                
+                <div class="trust-card fade-in">
+                    <i class="fas fa-handshake trust-icon"></i>
+                    <h3>Transparent Business Practices</h3>
+                    <p>We believe in complete transparency with our clients about our processes and policies.</p>
+                    
+                    <ul class="trust-list">
+                        <li>Clear pricing with no hidden fees</li>
+                        <li>Detailed account specifications provided upfront</li>
+                        <li>7-day replacement guarantee for faulty accounts</li>
+                        <li>Monthly performance reports</li>
+                        <li>Direct access to account managers</li>
+                    </ul>
+                </div>
+                
+                <div class="trust-card fade-in">
+                    <i class="fas fa-file-contract trust-icon"></i>
+                    <h3>Legal Compliance & Privacy</h3>
+                    <p>We operate in full compliance with international regulations and prioritize your privacy.</p>
+                    
+                    <ul class="trust-list">
+                        <li>GDPR compliant data handling</li>
+                        <li>Secure client data encryption</li>
+                        <li>No data sharing with third parties</li>
+                        <li>Confidentiality agreements available</li>
+                        <li>Secure document disposal policies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials section" id="testimonials">
+        <div class="container">
+            <h2>Client Reviews & Testimonials</h2>
+            <p class="section-subtitle">
+                Hear from our satisfied clients who have scaled their businesses with our premium account services.
+            </p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Credibility transformed our e-commerce business. We went from struggling with account bans to scaling to $50k/month in ad spend seamlessly. Their accounts are rock-solid."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JS</div>
+                        <div class="testimonial-info">
+                            <h4>James Sullivan</h4>
+                            <p>E-commerce Owner, UK</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "As a marketing agency, we rely on stable Facebook accounts. Credibility has been our secret weapon for 2 years now. 24/7 support is a game-changer."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>CEO, Digital Agency</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "After multiple failed attempts with other providers, Credibility delivered exactly what they promised. Their verification service recovered our banned account in 48 hours."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">TK</div>
+                        <div class="testimonial-info">
+                            <h4>Thomas Kowalski</h4>
+                            <p>Startup Founder, Germany</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section section" id="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <p class="section-subtitle">
+                Find answers to the most common questions about our services, security, and processes.
+            </p>
+            
+            <div class="faq-container">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>Are the accounts truly verified and safe to use?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all our accounts are fully verified with proper identification documents and have been aged for 6-36 months. They include 2FA protection and are configured with anti-detection measures. We provide a 7-day replacement guarantee if any issues arise.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>What happens if my account gets restricted or banned?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 7-day replacement guarantee for any account issues. Additionally, our Account Verification & Recovery service has an 80% success rate for recovering restricted/banned accounts. We also provide guidance on best practices to minimize restriction risks.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>How quickly can I get started after ordering?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For standard services, delivery is within 2-4 hours during business hours. For premium and custom packages, we typically deliver within 24 hours. We offer expedited delivery (within 1 hour) for urgent requests at an additional 20% fee.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>What payment methods do you accept?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept cryptocurrency (Bitcoin, Ethereum, USDT), bank transfers, PayPal, and credit cards. For larger orders, we offer payment plans and custom billing arrangements. All payments are secured with encryption.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>Do you offer custom solutions for agencies?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we work with many digital agencies and offer custom packages including white-label solutions, dedicated account managers, volume discounts, and custom billing. Contact us to discuss your specific agency needs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in">
+                    <div class="faq-question">
+                        <h3>Is my data and information kept confidential?</h3>
+                        <i class="fas fa-plus faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We have strict confidentiality policies and never share client information with third parties. We use encrypted communication channels and secure data storage. Confidentiality agreements are available upon request for enterprise clients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact section" id="contact">
         <div class="container">
@@ -1393,13 +1819,13 @@
                 </div>
                 
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+                    <h4>Company</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#services">All Services</a></li>
-                        <li><a href="#why-us">Why Choose Us</a></li>
+                        <li><a href="#trust">Trust Policy</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="#contact">Get Quote</a></li>
                         <li><a href="#contact">Support</a></li>
                     </ul>
                 </div>
@@ -1498,6 +1924,7 @@
         const modalContactBtn = document.getElementById('modal-contact-btn');
         const modalTitle = document.getElementById('modal-title');
         const modalDescription = document.getElementById('modal-description');
+        const faqItems = document.querySelectorAll('.faq-item');
         
         // Service data for modal
         const serviceData = {
@@ -1540,6 +1967,22 @@
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // FAQ Accordion
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
             });
         });
         
@@ -1676,6 +2119,12 @@
             if (copyrightElements.length > 0) {
                 copyrightElements[0].innerHTML = copyrightElements[0].innerHTML.replace('2023', year);
             }
+            
+            // Add some random animation delays for floating shapes
+            const shapes = document.querySelectorAll('.floating-shape');
+            shapes.forEach((shape, index) => {
+                shape.style.animationDelay = `${index * 3}s`;
+            });
         });
     </script>
 </body>
