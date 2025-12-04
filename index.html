@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustyBM - Secure Social Media Account Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #111111;
+            --secondary-dark: #1a1a1a;
+            --accent-green: #00ff9d;
+            --accent-blue: #0080ff;
+            --accent-purple: #7b61ff;
+            --text-light: #f0f0f0;
+            --text-gray: #b0b0b0;
+            --border-gray: #333333;
+            --card-bg: #1e1e1e;
+            --gradient-primary: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --header-height: 80px;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background (Desktop Only) */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .background-animation {
+                display: block;
+            }
+        }
+
+        .gradient-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-blue);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-green);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .circle-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-purple);
+            bottom: 10%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: 'Manrope', sans-serif;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--border-gray);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            transform: translateY(-3px);
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-icon {
+            margin-right: 8px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            height: var(--header-height);
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--accent-green);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-green);
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: var(--header-height);
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - var(--header-height));
+                background-color: var(--secondary-dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: right 0.5s ease;
+                border-left: 1px solid var(--border-gray);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--secondary-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid var(--border-gray);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        .service-card p {
+            flex-grow: 1;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .services {
+                padding: 80px 0;
+            }
+            
+            .service-card:hover {
+                transform: none;
+            }
+        }
+
+        /* Why Us Section */
+        .why-us {
+            padding: 100px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-gray);
+            transition: var(--transition);
+        }
+
+        .benefit-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-blue);
+        }
+
+        @media (max-width: 768px) {
+            .why-us {
+                padding: 80px 0;
+            }
+            
+            .benefit-item:hover {
+                transform: none;
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--secondary-dark);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            margin-top: 5px;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 5px;
+        }
+
+        .contact-link {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--accent-green);
+        }
+
+        @media (max-width: 768px) {
+            .contact {
+                padding: 80px 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            background-color: var(--primary-dark);
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .footer-logo span {
+            color: var(--accent-green);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-gray);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            position: relative;
+            border: 1px solid var(--border-gray);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--accent-green);
+        }
+
+        .modal h3 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .modal p {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .messenger-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .messenger-option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--primary-dark);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .messenger-option:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .messenger-option.selected {
+            border-color: var(--accent-green);
+            background-color: rgba(0, 255, 157, 0.05);
+        }
+
+        .messenger-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .messenger-text {
+            flex-grow: 1;
+        }
+
+        .messenger-text h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .messenger-text p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-gray);
+        }
+
+        .messenger-check {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .messenger-option.selected .messenger-check {
+            opacity: 1;
+        }
+
+        .modal-contact-btn {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .modal-features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .modal-feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .modal-feature i {
+            color: var(--accent-green);
+        }
+
+        @media (max-width: 768px) {
+            .modal {
+                padding: 30px 20px;
+            }
+            
+            .modal-features {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        /* Utility Classes */
+        .section {
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+
+        /* Animations for Desktop */
+        @media (min-width: 768px) {
+            .fade-in {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background (Desktop Only) -->
+    <div class="background-animation">
+        <div class="gradient-circle circle-1"></div>
+        <div class="gradient-circle circle-2"></div>
+        <div class="gradient-circle circle-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-alt logo-icon"></i>
+                Trusty<span>BM</span>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#why-us" class="nav-link">Why Us</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero section" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Secure Facebook & Instagram Account Management</h1>
+                <p class="hero-description">
+                    TrustyBM provides professional, secure management and rental services for Facebook, Instagram accounts, and advertising cabinets. Protect your digital assets with our cutting-edge security solutions.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="choose-service-hero">
+                        <i class="fas fa-check-circle btn-icon"></i> Choose a Service
+                    </button>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope btn-icon"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services section" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="section-subtitle">
+                We offer a comprehensive range of services to manage and optimize your social media advertising presence with maximum security and efficiency.
+            </p>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-user-circle service-icon"></i>
+                    <h3>Facebook Account Rental</h3>
+                    <p>Secure, verified Facebook accounts for advertising. We handle all verification and security protocols to ensure uninterrupted campaign execution.</p>
+                    <button class="btn btn-primary btn-small choose-service" data-service="Facebook Account Rental">
+                        <i class="fas fa-check btn-icon"></i> Choose
+                    </button>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-camera service-icon"></i>
+                    <h3>Instagram Account Management</h3>
+                    <p>Professional management of Instagram business accounts including content planning, engagement, and advertising setup.</p>
+                    <button class="btn btn-primary btn-small choose-service" data-service="Instagram Account Management">
+                        <i class="fas fa-check btn-icon"></i> Choose
+                    </button>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-ad service-icon"></i>
+                    <h3>Advertising Cabinet Management</h3>
+                    <p>Full management of your Facebook/Instagram advertising cabinets including campaign setup, optimization, and performance analysis.</p>
+                    <button class="btn btn-primary btn-small choose-service" data-service="Advertising Cabinet Management">
+                        <i class="fas fa-check btn-icon"></i> Choose
+                    </button>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card fade-in">
+                    <i class="fas fa-shield-alt service-icon"></i>
+                    <h3>Account Security & Protection</h3>
+                    <p>Advanced security solutions to protect your social media accounts from hacking, restrictions, and unauthorized access.</p>
+                    <button class="btn btn-primary btn-small choose-service" data-service="Account Security & Protection">
+                        <i class="fas fa-check btn-icon"></i> Choose
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us section" id="why-us">
+        <div class="container">
+            <h2>Why Choose TrustyBM?</h2>
+            <p class="section-subtitle">
+                We combine cutting-edge technology with industry expertise to deliver unmatched security and performance for your social media accounts.
+            </p>
+            
+            <div class="benefits-grid">
+                <!-- Benefit 1 -->
+                <div class="benefit-item fade-in">
+                    <i class="fas fa-lock benefit-icon"></i>
+                    <h3>Maximum Security</h3>
+                    <p>Advanced encryption and security protocols to protect your accounts from unauthorized access.</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-item fade-in">
+                    <i class="fas fa-bolt benefit-icon"></i>
+                    <h3>High Performance</h3>
+                    <p>Optimized account management ensures your campaigns run smoothly without interruptions.</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-item fade-in">
+                    <i class="fas fa-globe benefit-icon"></i>
+                    <h3>Worldwide Coverage</h3>
+                    <p>Services available globally with 24/7 support to cater to different time zones.</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="benefit-item fade-in">
+                    <i class="fas fa-headset benefit-icon"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support to address any issues or questions immediately.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p class="section-subtitle">
+                Get in touch with our team to discuss your needs and find the perfect solution for your social media management.
+            </p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <!-- Contact Item 1 -->
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp contact-icon"></i>
+                        <div class="contact-text">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/447521359062" class="contact-link" target="_blank">+447521359062</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Item 2 -->
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <a href="mailto:advortex.space@gmail.com" class="contact-link">advortex.space@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Item 3 -->
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <div class="contact-text">
+                            <h4>Address</h4>
+                            <p>14 Seafield Place, Four Oaks</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Item 4 -->
+                    <div class="contact-item">
+                        <i class="fab fa-telegram contact-icon"></i>
+                        <div class="contact-text">
+                            <h4>Telegram</h4>
+                            <a href="https://t.me/AdVortex_space" class="contact-link" target="_blank">@AdVortex_space</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-action">
+                    <h3>Ready to Secure Your Accounts?</h3>
+                    <p>Contact us today to discuss your needs and get a customized solution for your social media management.</p>
+                    <button class="btn btn-primary" id="choose-service-contact">
+                        <i class="fas fa-calendar-check btn-icon"></i> Schedule a Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        Trusty<span>BM</span>
+                    </a>
+                    <p>Professional, secure management and rental services for Facebook, Instagram accounts, and advertising cabinets.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#why-us">Why Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Facebook Account Rental</a></li>
+                        <li><a href="#services">Instagram Management</a></li>
+                        <li><a href="#services">Advertising Cabinets</a></li>
+                        <li><a href="#services">Account Security</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +447521359062</li>
+                        <li><i class="fas fa-envelope"></i> advortex.space@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 14 Seafield Place, Four Oaks</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 TrustyBM. All rights reserved. | Secure Social Media Account Management</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <h3>Order Your Service Now</h3>
+            <p>Select your preferred messaging platform to contact us and get started with your chosen service.</p>
+            
+            <div class="messenger-options">
+                <!-- WhatsApp Option -->
+                <div class="messenger-option selected" id="whatsapp-option">
+                    <i class="fab fa-whatsapp messenger-icon" style="color: #25D366;"></i>
+                    <div class="messenger-text">
+                        <h4>WhatsApp</h4>
+                        <p>Fast response, ideal for quick questions and service orders</p>
+                    </div>
+                    <i class="fas fa-check-circle messenger-check"></i>
+                </div>
+                
+                <!-- Telegram Option -->
+                <div class="messenger-option" id="telegram-option">
+                    <i class="fab fa-telegram messenger-icon" style="color: #0088cc;"></i>
+                    <div class="messenger-text">
+                        <h4>Telegram</h4>
+                        <p>Secure messaging with file sharing capabilities</p>
+                    </div>
+                    <i class="fas fa-check-circle messenger-check"></i>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary modal-contact-btn" id="modal-contact-btn">
+                Contact via WhatsApp
+            </button>
+            
+            <div class="modal-features">
+                <div class="modal-feature">
+                    <i class="fas fa-clock"></i>
+                    <span>We work 24/7</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="fas fa-globe"></i>
+                    <span>Worldwide delivery</span>
+                </div>
+                <div class="modal-feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure transactions</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalClose = document.getElementById('modal-close');
+        const chooseServiceHero = document.getElementById('choose-service-hero');
+        const chooseServiceContact = document.getElementById('choose-service-contact');
+        const chooseServiceButtons = document.querySelectorAll('.choose-service');
+        const whatsappOption = document.getElementById('whatsapp-option');
+        const telegramOption = document.getElementById('telegram-option');
+        const modalContactBtn = document.getElementById('modal-contact-btn');
+        
+        // Navigation Toggle for Mobile
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Modal Functions
+        function openModal(service = '') {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Update modal title if service is specified
+            if (service) {
+                const modalTitle = document.querySelector('.modal h3');
+                modalTitle.textContent = `Order: ${service}`;
+            }
+        }
+        
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Open modal when clicking on "Choose Service" buttons
+        chooseServiceHero.addEventListener('click', () => openModal());
+        chooseServiceContact.addEventListener('click', () => openModal());
+        
+        chooseServiceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const service = button.getAttribute('data-service');
+                openModal(service);
+            });
+        });
+        
+        // Close modal when clicking on close button or outside modal
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+        
+        // Messenger selection logic
+        let selectedMessenger = 'whatsapp';
+        
+        whatsappOption.addEventListener('click', () => {
+            selectedMessenger = 'whatsapp';
+            whatsappOption.classList.add('selected');
+            telegramOption.classList.remove('selected');
+            modalContactBtn.textContent = 'Contact via WhatsApp';
+        });
+        
+        telegramOption.addEventListener('click', () => {
+            selectedMessenger = 'telegram';
+            telegramOption.classList.add('selected');
+            whatsappOption.classList.remove('selected');
+            modalContactBtn.textContent = 'Contact via Telegram';
+        });
+        
+        // Contact button redirect
+        modalContactBtn.addEventListener('click', () => {
+            let url = '';
+            
+            if (selectedMessenger === 'whatsapp') {
+                url = 'https://wa.me/447521359062';
+            } else {
+                url = 'https://t.me/AdVortex_space';
+            }
+            
+            window.open(url, '_blank');
+        });
+        
+        // Scroll animations for desktop
+        if (window.innerWidth >= 768) {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Initial check
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Close mobile menu when resizing to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
