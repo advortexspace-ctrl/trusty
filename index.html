@@ -831,7 +831,7 @@
 
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
@@ -848,6 +848,7 @@
         .testimonial-card:hover {
             border-color: var(--accent-orange);
             transform: translateY(-5px);
+            box-shadow: var(--shadow-light);
         }
 
         .testimonial-rating {
@@ -859,12 +860,15 @@
             font-style: italic;
             margin-bottom: 20px;
             color: var(--text-light);
+            line-height: 1.7;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
             margin-top: 20px;
+            border-top: 1px solid var(--border-gray);
+            padding-top: 20px;
         }
 
         .testimonial-avatar {
@@ -878,17 +882,12 @@
             margin-right: 15px;
             font-weight: bold;
             color: var(--primary-dark);
+            font-size: 1.2rem;
         }
 
         .testimonial-info h4 {
             margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        .testimonial-info p {
-            margin-bottom: 0;
-            font-size: 0.9rem;
-            color: var(--text-gray);
+            font-size: 1.1rem;
         }
 
         /* FAQ Section */
@@ -1578,6 +1577,7 @@
             </p>
             
             <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-rating">
                         <i class="fas fa-star"></i>
@@ -1587,17 +1587,17 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <p class="testimonial-text">
-                        "Credibility transformed our e-commerce business. We went from struggling with account bans to scaling to $50k/month in ad spend seamlessly. Their accounts are rock-solid."
+                        "I've been using Credibility's Facebook Business Manager accounts for 8 months now. The accounts are rock-solid, aged, and never get restricted. Their 24/7 support is exceptional - they've saved my campaigns multiple times."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">JS</div>
                         <div class="testimonial-info">
                             <h4>James Sullivan</h4>
-                            <p>E-commerce Owner, UK</p>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Testimonial 2 -->
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-rating">
                         <i class="fas fa-star"></i>
@@ -1607,17 +1607,17 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <p class="testimonial-text">
-                        "As a marketing agency, we rely on stable Facebook accounts. Credibility has been our secret weapon for 2 years now. 24/7 support is a game-changer."
+                        "After trying 3 different providers with constant account bans, Credibility was a game-changer. Their Instagram business accounts are properly verified and aged. We've scaled our e-commerce store from $10k to $80k monthly revenue."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">MR</div>
                         <div class="testimonial-info">
                             <h4>Maria Rodriguez</h4>
-                            <p>CEO, Digital Agency</p>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Testimonial 3 -->
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-rating">
                         <i class="fas fa-star"></i>
@@ -1627,13 +1627,72 @@
                         <i class="fas fa-star-half-alt"></i>
                     </div>
                     <p class="testimonial-text">
-                        "After multiple failed attempts with other providers, Credibility delivered exactly what they promised. Their verification service recovered our banned account in 48 hours."
+                        "The advertising account rental service saved our agency. We can now run multiple campaigns simultaneously without worrying about spending limits. The 15% fee is worth every penny for the stability they provide."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">TK</div>
                         <div class="testimonial-info">
                             <h4>Thomas Kowalski</h4>
-                            <p>Startup Founder, Germany</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Credibility recovered my banned Facebook account in 48 hours when others said it was impossible. Their verification service is worth its weight in gold. I've referred 5 other business owners to them already."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AS</div>
+                        <div class="testimonial-info">
+                            <h4>Alexandra Schmidt</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 5 -->
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "As a digital marketing agency managing 20+ clients, we need reliable accounts. Credibility's scaling package gives us 5 Business Managers and 10 ad accounts. Their full management service handles all our optimizations perfectly."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">DW</div>
+                        <div class="testimonial-info">
+                            <h4>David Wilson</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 6 -->
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "I was skeptical at first, but after 6 months with Credibility, I'm a believer. Their accounts are properly aged and verified. The WhatsApp support responds in minutes, even at 3 AM. Best investment for my online business."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">LC</div>
+                        <div class="testimonial-info">
+                            <h4>Lisa Chen</h4>
                         </div>
                     </div>
                 </div>
